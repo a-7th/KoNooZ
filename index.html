@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KoNooZ</title>
+<style>
+  :root {
+    --bg-color:#121212; --text-color:#f1f1f1; --header-bg:#1a1a1a; --header-color:#b8860b;
+    --item-bg:#1e1e1e; --btn-bg:#333; --btn-color:#b8860b;
+  }
+
+  body {
+    font-family:Arial,sans-serif; background:var(--bg-color); color:var(--text-color);
+    margin:0; padding:0; text-align:center; overflow-x:hidden; transition:0.3s;
+  }
+
+  header {
+    position:relative; overflow:hidden; background:var(--header-bg); color:var(--header-color);
+    padding:20px; font-size:2em; font-weight:bold; display:flex; align-items:center; justify-content:center;
+    animation: shimmerText 3s ease-in-out infinite;
+  }
+  header::after{
+    content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+    background: radial-gradient(circle, #b8860b44 0%, transparent 70%);
+    animation: waveHeader 8s linear infinite; pointer-events:none;
+  }
+
+  @keyframes shimmerText{0%,100%{text-shadow:0 0 5px #b8860b,0 0 10px #b8860b33;}50%{text-shadow:0 0 15px #ffd700,0 0 30px #ffd70077;} }
+  @keyframes waveHeader{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);} }
+
+  #homeIcon{height:40px; cursor:pointer; position:absolute; left:20px; top:50%; transform:translateY(-50%); }
+
+  .dark-mode-toggle,.lang-toggle{
+    position:absolute; top:50%; transform:translateY(-50%);
+    padding:8px 12px; background:var(--btn-bg); color:var(--btn-color);
+    border:none; border-radius:5px; cursor:pointer; transition:0.3s; z-index:2;
+  }
+  .dark-mode-toggle:hover,.lang-toggle:hover{ background:#555; }
+
+  .dark-mode-toggle{right:20px;}
+  .lang-toggle{
+    right:150px;
+    animation: langSparkle 2s infinite alternate;
+  }
+  @keyframes langSparkle{0%{text-shadow:0 0 5px #b8860b;}100%{text-shadow:0 0 15px #ffd700; }}
+
+  .category-filter{margin:20px;}
+  .category-filter button{
+    margin:5px; padding:10px 15px; background:var(--btn-bg); color:var(--btn-color);
+    border:none; border-radius:5px; cursor:pointer; transition:0.3s;
+  }
+  .category-filter button:hover,.category-filter button.active{background:#555;}
+
+  .shop-container{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin:20px;
+    opacity:1; transition:opacity 0.5s;
+  }
+
+  .item{
+    background:var(--item-bg); border-radius:10px; padding:15px; width:220px;
+    box-shadow:0 2px 15px rgba(255,215,0,0.2);
+    cursor:pointer; position:relative; overflow:hidden; opacity:0; transform:translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+  }
+  .item::after{
+    content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+    background: radial-gradient(circle, #ffd70033 0%, transparent 70%);
+    opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:0;
+  }
+  .item:hover::after{ opacity:1; animation: waveItem 4s linear infinite; }
+
+  @keyframes waveItem{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  @keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
+
+  .item img{width:100%; height:220px; object-fit:cover; border-radius:10px; position:relative; z-index:1;}
+  .item h3,.item p,.item a{position:relative; z-index:1; margin:5px 0;}
+
+  .item a{
+    display:inline-block; margin-top:10px; padding:8px 12px; background:#25D366; color:white;
+    text-decoration:none; border-radius:5px; transition:0.3s;
+  }
+  .item a:hover{background:#1ebe57;}
+
+  .product-detail{
+    display:none; margin:20px auto; background:var(--item-bg); color:var(--text-color);
+    border-radius:10px; padding:20px; width:90%; max-width:600px;
+    text-align:left; box-shadow:0 2px 15px rgba(255,215,0,0.2);
+    opacity:0; transition:opacity 0.5s;
+  }
+  .product-detail.show{display:block; opacity:1;}
+  .product-detail img{width:100%; height:auto; border-radius:10px; margin-bottom:15px;}
+  .back-btn{display:inline-block; margin-top:10px; padding:8px 12px; background:#555; color:#b8860b; text-decoration:none; border-radius:5px; cursor:pointer;}
+
+  @media(max-width:600px){
+    header{font-size:1.5em;}
+    #homeIcon{height:30px; left:10px;}
+    .dark-mode-toggle{right:10px;}
+    .lang-toggle{right:120px;}
+    .shop-container{flex-direction:column; align-items:center;}
+  }
+
+</style>
+</head>
+<body class="dark">
+
+<header>
+  <img src="/home/a7th/Pictures/Screenshots/itachi.png" alt="KoNooZ" id="homeIcon">
+  KoNooZ
+  <button class="dark-mode-toggle" id="darkModeToggle">Light Mode</button>
+  <button class="lang-toggle" id="langToggle">AR</button>
+</header>
+
+<div class="category-filter" id="categoryFilter">
+  <button class="active" data-category="all" data-name-en="All" data-name-ar="الكل">All</button>
+  <button data-category="tshirt" data-name-en="T-Shirts" data-name-ar="تي شيرت">T-Shirts</button>
+  <button data-category="jeans" data-name-en="Jeans" data-name-ar="جينز">Jeans</button>
+  <button data-category="jacket" data-name-en="Jackets" data-name-ar="سترات">Jackets</button>
+  <button data-category="shoes" data-name-en="Shoes" data-name-ar="أحذية">Shoes</button>
+  <button data-category="accessories" data-name-en="Accessories" data-name-ar="إكسسوارات">Accessories</button>
+  <button data-category="palestinian_stuff" data-name-en="Palestinian Stuff" data-name-ar="منتجات فلسطينية">Palestinian Stuff</button>
+</div>
+
+<div class="shop-container" id="shopContainer"></div>
+
+<div class="product-detail" id="productDetail">
+  <h2 id="detailName"></h2>
+  <img id="detailImg" src="" alt="">
+  <p id="detailPrice"></p>
+  <a id="detailOrder" href="" target="_blank">Order on WhatsApp</a>
+  <br>
+  <span class="back-btn" id="backBtn">Back to Shop</span>
+</div>
+
+<script>
+let lang='en';
+const products=[
+  {nameEn:"full_bloody", nameAr:"فل بولدي", price:"700.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/full_booldy1.png", category:"palestinian_stuff"},
+  {nameEn:"up_bloody", nameAr:"أب بولدي", price:"400.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_bloody_dark2.png", category:"palestinian_stuff"},
+];
+
+const container=document.getElementById('shopContainer');
+const categoryButtons=document.querySelectorAll('#categoryFilter button');
+const darkModeToggle=document.getElementById('darkModeToggle');
+const langToggle=document.getElementById('langToggle');
+const detailSection=document.getElementById('productDetail');
+const detailName=document.getElementById('detailName');
+const detailImg=document.getElementById('detailImg');
+const detailPrice=document.getElementById('detailPrice');
+const detailOrder=document.getElementById('detailOrder');
+const backBtn=document.getElementById('backBtn');
+const homeIcon=document.getElementById('homeIcon');
+
+function displayProducts(category='all'){
+  container.innerHTML='';
+  const filtered=category==='all'? products : products.filter(p=>p.category===category);
+  filtered.forEach((p,i)=>{
+    const item=document.createElement('div');
+    item.classList.add('item');
+    item.style.animationDelay=(i*0.2)+'s';
+    const name=lang==='en'?p.nameEn:p.nameAr;
+    item.innerHTML=`<img src="${p.img}" alt="${name}"><h3>${name}</h3><p>Price: ${p.price}</p>`;
+    item.addEventListener('click',()=>{
+      detailName.textContent=name;
+      detailImg.src=p.img;
+      detailPrice.textContent=`Price: ${p.price}`;
+      detailOrder.href=`https://wa.me/212600000000?text=Hi! I want this ${encodeURIComponent(name)}`;
+      container.style.opacity='0';
+      setTimeout(()=>{container.style.display='none';},300);
+      detailSection.classList.add('show');
+    });
+    container.appendChild(item);
+  });
+}
+
+categoryButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    categoryButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    displayProducts(btn.dataset.category);
+    detailSection.classList.remove('show');
+    container.style.display='flex';
+    setTimeout(()=>{ container.style.opacity='1'; },10);
+  });
+});
+
+darkModeToggle.addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+  document.body.classList.toggle('dark');
+  darkModeToggle.textContent = document.body.classList.contains('light') ? 'Dark Mode' : 'Light Mode';
+});
+
+langToggle.addEventListener('click',()=>{
+  lang = lang==='en'?'ar':'en';
+  displayProducts(document.querySelector('.category-filter button.active').dataset.category);
+  categoryButtons.forEach(btn=>{ btn.textContent = lang==='en'?btn.dataset.nameEn:btn.dataset.nameAr; });
+});
+
+backBtn.addEventListener('click',()=>{
+  detailSection.classList.remove('show');
+  container.style.display='flex';
+  setTimeout(()=>{ container.style.opacity='1'; },10);
+});
+
+homeIcon.addEventListener('click',()=>{
+  detailSection.classList.remove('show');
+  container.style.display='flex';
+  container.style.opacity='1';
+  categoryButtons.forEach(b=>b.classList.remove('active'));
+  categoryButtons[0].classList.add('active');
+  displayProducts('all');
+});
+
+displayProducts();
+</script>
+</body>
+</html>
+
