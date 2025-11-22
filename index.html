@@ -104,7 +104,7 @@
 <body class="dark">
 
 <header>
-  <img src="/home/a7th/Pictures/Screenshots/itachi.png" alt="KoNooZ" id="homeIcon">
+  <img src="images/itachi.png" alt="KoNooZ" id="homeIcon">
   KoNooZ
   <button class="dark-mode-toggle" id="darkModeToggle">Light Mode</button>
   <button class="lang-toggle" id="langToggle">AR</button>
@@ -133,11 +133,10 @@
 
 <script>
 let lang='en';
-const products=[
-  {nameEn:"full_bloody", nameAr:"فل بولدي", price:"700.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/full_booldy1.png", category:"palestinian_stuff"},
-  {nameEn:"up_bloody", nameAr:"أب بولدي", price:"400.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_bloody_dark2.png", category:"palestinian_stuff"},
+  const products=[
+  {nameEn:"full_bloody", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_booldy1.png", category:"palestinian_stuff"},
+  {nameEn:"up_bloody", nameAr:"أب بولدي", price:"400.00MAD", img:"images/up_bloody_dark2.png", category:"palestinian_stuff"},
 ];
-
 const container=document.getElementById('shopContainer');
 const categoryButtons=document.querySelectorAll('#categoryFilter button');
 const darkModeToggle=document.getElementById('darkModeToggle');
