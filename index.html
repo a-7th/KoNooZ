@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>KoNooZ</title>
+<title>KoNooZ - Online Shop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="KoNooZ - Best shop for T-Shirts, Jackets, Shoes, Accessories and Palestinian Stuff.">
+<meta name="keywords" content="KoNooZ, T-Shirts, Jackets, Shoes, Accessories, Palestinian Stuff, Online Shop">
+<meta name="author" content="KoNooZ">
 <style>
 :root {
   --bg-color:#121212; --text-color:#f1f1f1; --header-bg:#1a1a1a; --header-color:#b8860b;
@@ -17,8 +20,6 @@ body.light {
   --bg-color:#f9f9f9; --text-color:#333; --header-bg:#f1f1f1; --header-color:#b8860b;
   --item-bg:#fff; --btn-bg:#333; --btn-color:#b8860b;
 }
-
-/* ===== HEADER ===== */
 header {
   display:flex; align-items:center; justify-content:space-between; padding:20px;
   background:var(--header-bg); color:var(--header-color); position:relative;
@@ -34,8 +35,6 @@ header h1 {
   0%,100%{text-shadow:0 0 5px #ffd700,0 0 10px #b8860b33;}
   50%{text-shadow:0 0 15px #ffeb3b,0 0 30px #ffd70077;}
 }
-
-/* ICON & TOGGLE */
 #homeIcon {height:40px; cursor:pointer;}
 #toggleBtn {
   padding:8px 12px; background:var(--btn-bg); color:var(--btn-color);
@@ -44,8 +43,6 @@ header h1 {
 }
 #toggleBtn:hover { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
 @keyframes toggleSparkle{0%{text-shadow:0 0 5px #b8860b;}100%{text-shadow:0 0 15px #ffd700;}}
-
-/* CATEGORY FILTER */
 .category-filter{margin:20px;}
 .category-filter button{
   margin:5px; padding:10px 15px; background:var(--btn-bg); color:var(--btn-color);
@@ -54,8 +51,6 @@ header h1 {
 .category-filter button:hover,.category-filter button.active{
   background:#555; transform:translateY(-2px);
 }
-
-/* ===== SHOP ITEMS (NEW CARD STYLE) ===== */
 .shop-container{
   display:flex; flex-wrap:wrap; justify-content:center; gap:25px; margin:20px;
   opacity:1; transition:opacity 0.5s;
@@ -77,8 +72,6 @@ header h1 {
 }
 .item a:hover{background:#1ebe57;}
 @keyframes fadeInUp{to{opacity:1; transform:translateY(0);}}
-
-/* PRODUCT DETAIL */
 .product-detail{
   display:none; margin:20px auto; background:var(--item-bg); color:var(--text-color);
   border-radius:20px; padding:20px; width:90%; max-width:600px; text-align:left;
@@ -87,8 +80,6 @@ header h1 {
 .product-detail.show{display:block; opacity:1;}
 .product-detail img{width:100%; height:auto; border-radius:15px; margin-bottom:15px;}
 .back-btn{display:inline-block; margin-top:10px; padding:8px 12px; background:#555; color:#b8860b; text-decoration:none; border-radius:5px; cursor:pointer;}
-
-/* MOBILE */
 @media(max-width:768px){
   header h1{font-size:1.6em;}
   #homeIcon{height:35px;}
@@ -153,8 +144,8 @@ function displayProducts(category='all'){
     item.onclick=()=>{
       detailName.textContent=name; detailImg.src=p.img; detailImg.alt=name;
       detailPrice.textContent=`Price: ${p.price}`;
-      // ✅ Updated WhatsApp number
-      detailOrder.href=`https://wa.me/212665299977?text=|||||a7th||||| ${encodeURIComponent(name)}`;
+      // ✅ WhatsApp number
+      detailOrder.href=`https://wa.me/212665299977?text=Hi! I want this ${encodeURIComponent(name)}`;
       container.style.display='none'; detailSection.classList.add('show');
     };
     container.appendChild(item);
@@ -176,13 +167,8 @@ toggleBtn.onclick=()=>{
   categoryButtons.forEach(btn=>{btn.textContent=lang==='en'?btn.dataset.nameEn:btn.dataset.nameAr;});
 };
 
-backBtn.onclick=()=>{
-  detailSection.classList.remove('show'); container.style.display='flex';
-};
-homeIcon.onclick=()=>{
-  detailSection.classList.remove('show'); container.style.display='flex'; displayProducts('all');
-};
-
+backBtn.onclick=()=>{detailSection.classList.remove('show'); container.style.display='flex';};
+homeIcon.onclick=()=>{detailSection.classList.remove('show'); container.style.display='flex'; displayProducts('all');};
 displayProducts();
 </script>
 
