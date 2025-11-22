@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>KoNooZ</title>
 
-  <!-- ✅ FIX FOR PHONE VERSION -->
+  <!-- ✅ PHONE FIX -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -39,17 +39,18 @@
       --btn-color: #b8860b;
     }
 
+    /* ===== HEADER ===== */
     header {
-      position:relative; 
-      overflow:hidden; 
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       background:var(--header-bg); 
       color:var(--header-color);
       padding:20px; 
       font-size:2em; 
-      font-weight:bold; 
-      display:flex; 
-      align-items:center; 
-      justify-content:center;
+      font-weight:bold;
       animation: shimmerText 3s ease-in-out infinite;
     }
 
@@ -75,50 +76,59 @@
       100%{transform:rotate(360deg);}
     }
 
+    /* ===== ICON & BUTTONS ===== */
     #homeIcon {
-      height:40px; 
-      cursor:pointer; 
-      position:absolute; 
-      left:20px; 
-      top:50%; 
-      transform:translateY(-50%);
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 40px;
+      cursor:pointer;
     }
 
-    .dark-mode-toggle,.lang-toggle{
-      position:absolute; 
-      top:50%; 
-      transform:translateY(-50%);
+    .dark-mode-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
       padding:8px 12px; 
       background:var(--btn-bg); 
       color:var(--btn-color);
       border:none; 
       border-radius:5px; 
       cursor:pointer; 
-      transition:0.3s; 
+      transition:0.3s;
       z-index:2;
     }
 
-    .dark-mode-toggle:hover,.lang-toggle:hover {background:#555;}
-
-    .dark-mode-toggle {right:20px;}
-    .lang-toggle {right:150px;}
-
-    .category-filter {margin:20px;}
-
-    .category-filter button{
-      margin:5px; 
-      padding:10px 15px; 
+    .lang-toggle {
+      position: absolute;
+      right: 150px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding:8px 12px; 
       background:var(--btn-bg); 
       color:var(--btn-color);
       border:none; 
       border-radius:5px; 
       cursor:pointer; 
       transition:0.3s;
+      z-index:2;
+      animation: langSparkle 2s infinite alternate;
     }
 
-    .category-filter button:hover,
-    .category-filter button.active {background:#555;}
+    .dark-mode-toggle:hover,.lang-toggle:hover{ background:#555; }
+    @keyframes langSparkle{0%{text-shadow:0 0 5px #b8860b;}100%{text-shadow:0 0 15px #ffd700;}}
 
+    /* ===== CATEGORY FILTER ===== */
+    .category-filter {margin:20px;}
+    .category-filter button{
+      margin:5px; padding:10px 15px; background:var(--btn-bg); color:var(--btn-color);
+      border:none; border-radius:5px; cursor:pointer; transition:0.3s;
+    }
+    .category-filter button:hover,.category-filter button.active{background:#555;}
+
+    /* ===== SHOP ITEMS ===== */
     .shop-container{
       display:flex; 
       flex-wrap:wrap; 
@@ -143,7 +153,6 @@
       animation: fadeInUp 0.8s forwards; 
       transition: background 0.5s, color 0.5s;
     }
-
     .item::after{
       content:''; 
       position:absolute; 
@@ -157,36 +166,18 @@
       pointer-events:none; 
       z-index:0;
     }
-
     .item:hover::after {
       opacity:1; 
       animation: waveItem 4s linear infinite;
     }
 
-    @keyframes waveItem {
-      0%{transform:rotate(0deg);}
-      100%{transform:rotate(360deg);}
-    }
+    @keyframes waveItem{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    @keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
 
-    @keyframes fadeInUp {
-      to {opacity:1; transform:translateY(0);}
-    }
+    .item img{width:100%; height:220px; object-fit:cover; border-radius:10px; position:relative; z-index:1;}
+    .item h3,.item p{position:relative; z-index:1; margin:5px 0;}
 
-    .item img {
-      width:100%; 
-      height:220px; 
-      object-fit:cover; 
-      border-radius:10px; 
-      position:relative; 
-      z-index:1;
-    }
-
-    .item h3,.item p {
-      position:relative; 
-      z-index:1; 
-      margin:5px 0;
-    }
-
+    /* ===== PRODUCT DETAIL ===== */
     .product-detail{
       display:none; 
       margin:20px auto; 
@@ -201,64 +192,22 @@
       opacity:0; 
       transition:opacity 0.5s;
     }
+    .product-detail.show {display:block; opacity:1;}
+    .product-detail img {width:100%; height:auto; border-radius:10px; margin-bottom:15px;}
+    .back-btn{display:inline-block; margin-top:10px; padding:8px 12px; background:#555; color:#b8860b; text-decoration:none; border-radius:5px; cursor:pointer;}
 
-    .product-detail.show {
-      display:block; 
-      opacity:1;
-    }
-
-    .product-detail img {
-      width:100%; 
-      height:auto; 
-      border-radius:10px; 
-      margin-bottom:15px;
-    }
-
-    .back-btn {
-      display:inline-block; 
-      margin-top:10px; 
-      padding:8px 12px; 
-      background:#555; 
-      color:#b8860b; 
-      text-decoration:none; 
-      border-radius:5px; 
-      cursor:pointer;
-    }
-
-    /* ✅ MOBILE VERSION */
+    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        font-size: 1.4em;
-        padding: 15px;
-      }
-
-      #homeIcon {
-        position: static;
-        transform:none;
-        margin-bottom:10px;
-      }
-
-      .dark-mode-toggle,
-      .lang-toggle {
-        position: static;
-        margin:10px 0;
-        transform:none;
-      }
-
-      .shop-container {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .item {
-        width: 90%;
-      }
+      header {font-size: 1.4em; padding:15px;}
+      #homeIcon {height:35px;}
+      .dark-mode-toggle {top:50%; right:10px; transform:translateY(-50%);}
+      .lang-toggle {right:120px;}
+      .shop-container {flex-direction: column; align-items: center;}
+      .item {width:90%;}
     }
 
   </style>
 </head>
-
 <body class="dark">
 
 <header>
@@ -316,21 +265,16 @@ function displayProducts(category='all'){
     const item=document.createElement('div');
     item.classList.add('item');
     item.style.animationDelay=(i*0.2)+'s';
-
     const name=lang==='en'?p.nameEn:p.nameAr;
-
     item.innerHTML=`<img src="${p.img}"><h3>${name}</h3><p>Price: ${p.price}</p>`;
-
     item.onclick=()=>{
       detailName.textContent=name;
       detailImg.src=p.img;
       detailPrice.textContent=`Price: ${p.price}`;
       detailOrder.href=`https://wa.me/212600000000?text=Hi! I want this ${encodeURIComponent(name)}`;
-
       container.style.display='none';
       detailSection.classList.add('show');
     };
-
     container.appendChild(item);
   });
 }
@@ -339,7 +283,6 @@ categoryButtons.forEach(btn=>{
   btn.onclick=()=>{
     categoryButtons.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-
     displayProducts(btn.dataset.category);
     detailSection.classList.remove('show');
     container.style.display='flex';
