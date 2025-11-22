@@ -11,7 +11,17 @@
 
   body {
     font-family:Arial,sans-serif; background:var(--bg-color); color:var(--text-color);
-    margin:0; padding:0; text-align:center; overflow-x:hidden; transition:0.3s;
+    margin:0; padding:0; text-align:center; overflow-x:hidden; transition:0.5s;
+  }
+
+  body.light {
+    --bg-color: #f9f9f9;
+    --text-color: #333;
+    --header-bg: #f1f1f1;
+    --header-color: #b8860b;
+    --item-bg: #fff;
+    --btn-bg: #333;
+    --btn-color: #b8860b;
   }
 
   header {
@@ -19,6 +29,7 @@
     padding:20px; font-size:2em; font-weight:bold; display:flex; align-items:center; justify-content:center;
     animation: shimmerText 3s ease-in-out infinite;
   }
+
   header::after{
     content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
     background: radial-gradient(circle, #b8860b44 0%, transparent 70%);
@@ -38,11 +49,8 @@
   .dark-mode-toggle:hover,.lang-toggle:hover{ background:#555; }
 
   .dark-mode-toggle{right:20px;}
-  .lang-toggle{
-    right:150px;
-    animation: langSparkle 2s infinite alternate;
-  }
-  @keyframes langSparkle{0%{text-shadow:0 0 5px #b8860b;}100%{text-shadow:0 0 15px #ffd700; }}
+  .lang-toggle{right:150px; animation: langSparkle 2s infinite alternate;}
+  @keyframes langSparkle{0%{text-shadow:0 0 5px #b8860b;}100%{text-shadow:0 0 15px #ffd700;}}
 
   .category-filter{margin:20px;}
   .category-filter button{
@@ -60,7 +68,7 @@
     background:var(--item-bg); border-radius:10px; padding:15px; width:220px;
     box-shadow:0 2px 15px rgba(255,215,0,0.2);
     cursor:pointer; position:relative; overflow:hidden; opacity:0; transform:translateY(20px);
-    animation: fadeInUp 0.8s forwards;
+    animation: fadeInUp 0.8s forwards; transition: background 0.5s, color 0.5s;
   }
   .item::after{
     content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
@@ -85,7 +93,7 @@
     display:none; margin:20px auto; background:var(--item-bg); color:var(--text-color);
     border-radius:10px; padding:20px; width:90%; max-width:600px;
     text-align:left; box-shadow:0 2px 15px rgba(255,215,0,0.2);
-    opacity:0; transition:opacity 0.5s;
+    opacity:0; transition:opacity 0.5s, background 0.5s, color 0.5s;
   }
   .product-detail.show{display:block; opacity:1;}
   .product-detail img{width:100%; height:auto; border-radius:10px; margin-bottom:15px;}
@@ -133,10 +141,11 @@
 
 <script>
 let lang='en';
-  const products=[
+const products=[
   {nameEn:"full_bloody", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_booldy1.png", category:"palestinian_stuff"},
   {nameEn:"up_bloody", nameAr:"أب بولدي", price:"400.00MAD", img:"images/up_bloody_dark2.png", category:"palestinian_stuff"},
 ];
+
 const container=document.getElementById('shopContainer');
 const categoryButtons=document.querySelectorAll('#categoryFilter button');
 const darkModeToggle=document.getElementById('darkModeToggle');
