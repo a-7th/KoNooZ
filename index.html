@@ -26,8 +26,7 @@ header {
 header h1 {
   flex:1; text-align:center; font-size:2em; font-weight:bold;
   background: linear-gradient(90deg, #ffd700, #b8860b, #ffeb3b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
   animation: shimmerText 3s ease-in-out infinite;
 }
@@ -41,8 +40,7 @@ header h1 {
 #toggleBtn {
   padding:8px 12px; background:var(--btn-bg); color:var(--btn-color);
   border:none; border-radius:8px; cursor:pointer; animation: toggleSparkle 2s infinite alternate;
-  box-shadow: 0 0 10px rgba(255,215,0,0.3);
-  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255,215,0,0.3); transition:0.3s;
 }
 #toggleBtn:hover { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
 @keyframes toggleSparkle{0%{text-shadow:0 0 5px #b8860b;}100%{text-shadow:0 0 15px #ffd700;}}
@@ -155,7 +153,8 @@ function displayProducts(category='all'){
     item.onclick=()=>{
       detailName.textContent=name; detailImg.src=p.img; detailImg.alt=name;
       detailPrice.textContent=`Price: ${p.price}`;
-      detailOrder.href=`https://wa.me/212600000000?text=Hi! I want this ${encodeURIComponent(name)}`;
+      // ✅ Updated WhatsApp number
+      detailOrder.href=`https://wa.me/212665299977?text=|||||a7th||||| ${encodeURIComponent(name)}`;
       container.style.display='none'; detailSection.classList.add('show');
     };
     container.appendChild(item);
