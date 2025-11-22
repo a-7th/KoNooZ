@@ -20,8 +20,8 @@ body.light {
 /* HEADER */
 header {
   position: relative; display:flex; align-items:center; justify-content:center; gap:10px;
-  background:var(--header-bg); color:var(--header-color); padding:20px; font-size:2em; font-weight:bold;
-  animation: shimmerText 3s ease-in-out infinite;
+  background:var(--header-bg); color:var(--header-color); padding:20px 50px 20px 50px;
+  font-size:2em; font-weight:bold; animation: shimmerText 3s ease-in-out infinite;
 }
 header::after {
   content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
@@ -89,7 +89,7 @@ header::after {
 
 /* MOBILE */
 @media(max-width:768px){
-  header{font-size:1.4em; padding:15px;}
+  header{font-size:1.4em; padding:15px 40px 15px 40px;}
   #homeIcon{height:35px;}
   .dark-mode-toggle{right:10px;}
   .lang-toggle{right:120px;}
