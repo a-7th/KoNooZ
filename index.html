@@ -60,7 +60,7 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 
 <!-- Opening Animation -->
 <div id="openingAnimation">
-  <img src="images/full_bloody2.png" alt="Best Product">
+  <img src="images/logo.png" alt="KoNooZ Logo">
   <h1>KoNooZ</h1>
 </div>
 
@@ -98,12 +98,12 @@ const products=[
   {nameEn:"Full Bloody Dress 1", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_booldy1.png", category:"palestinian_stuff", badge:"Special"},
   {nameEn:"Up Bloody 1", nameAr:"أب بولدي", price:"400.00MAD", img:"images/up_bloody1.png", category:"palestinian_stuff", badge:"Special"},
   {nameEn:"Up Bloody Dark 2", nameAr:"أب بولدي داكن", price:"450.00MAD", img:"images/up_bloody_dark2.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody Dark 2 Copy", nameAr:"نسخة أب بولدي داكن", price:"450.00MAD", img:"images/up_bloody_dark2_copy.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody Dark 2 Copy", nameAr:"نسخة أب بولدي داكن", price:"450.00MAD", img:"images/up_bloody_dark2 (Copy).png", category:"palestinian_stuff", badge:"Special"},
   {nameEn:"Up White Bloody 1", nameAr:"أب أبيض بولدي", price:"400.00MAD", img:"images/up_white_bloody1.png", category:"palestinian_stuff", badge:"Special"},
   {nameEn:"Up White Bloody 2", nameAr:"أب أبيض بولدي 2", price:"420.00MAD", img:"images/up_white_bloody2.png", category:"palestinian_stuff", badge:"Special"},
   {nameEn:"Itachi Poster", nameAr:"بوستر إيتاتشي", price:"150.00MAD", img:"images/itachi.png", category:"accessories"},
   {nameEn:"Saski Poster", nameAr:"بوستر ساسكي", price:"150.00MAD", img:"images/saski.png", category:"accessories"},
-  {nameEn:"Background Poster", nameAr:"خلفية", price:"100.00MAD", img:"images/a7th_backgrnd.png", category:"accessories"}
+  {nameEn:"Background Poster", nameAr:"خلفية", price:"100.00MAD", img:"images/a7th backgrnd.png", category:"accessories"}
 ];
 
 const container=document.getElementById('shopContainer');
@@ -133,14 +133,10 @@ function displayProducts(category='all'){
     item.onclick=()=>{
       item.style.animation='goProductEffect 0.6s forwards';
       setTimeout(()=>{
-        detailSection.style.transform='scale(0.9)';
-        detailSection.classList.add('show');
-        setTimeout(()=>{ detailSection.style.transform='scale(1)'; },50);
-
         detailName.textContent=name; detailImg.src=p.img; detailImg.alt=name;
         detailPrice.textContent=`Price: ${p.price}`;
         detailOrder.href=`https://wa.me/212665299977?text=Hi! I want this ${encodeURIComponent(name)}`;
-        container.style.display='none'; 
+        container.style.display='none'; detailSection.classList.add('show');
       },600);
     };
     container.appendChild(item);
@@ -152,7 +148,7 @@ window.addEventListener('load', ()=>{
     openingDiv.style.opacity='0';
     openingDiv.style.transition='opacity 0.8s ease';
     setTimeout(()=>{ openingDiv.style.display='none'; },800);
-  },2000);
+  },2500);
 });
 
 categoryButtons.forEach(btn=>{
