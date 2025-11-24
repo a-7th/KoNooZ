@@ -39,25 +39,28 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 .item-opening { animation: productOpen 0.8s ease forwards; }
 @keyframes productOpen { 0% { opacity:0; transform: scale(0.5) rotate(-15deg); } 50% { opacity:1; transform: scale(1.1) rotate(3deg); } 100% { opacity:1; transform: scale(1) rotate(0deg); } }
 
-.product-detail{ display:none; margin:20px auto; background:linear-gradient(145deg, #1c1c1c, #2a2a2a); color:var(--text-color); border-radius:25px; padding:20px; width:90%; max-width:600px; text-align:left; box-shadow:0 8px 25px rgba(0,0,0,0.25); opacity:0; transition:opacity 0.5s; }
-.product-detail.show{display:block; opacity:1;}
+.product-detail{ display:none; margin:20px auto; background:linear-gradient(145deg, #1c1c1c, #2a2a2a); color:var(--text-color); border-radius:25px; padding:20px; width:90%; max-width:600px; text-align:left; box-shadow:0 8px 25px rgba(0,0,0,0.25); opacity:0; transition:opacity 0.5s, transform 0.5s; }
+.product-detail.show{display:block; opacity:1; transform:translateY(0);}
 .product-detail img{width:100%; height:auto; border-radius:20px; margin-bottom:15px;}
 .back-btn{display:inline-block; margin-top:10px; padding:8px 12px; background:#555; color:#ffd700; text-decoration:none; border-radius:8px; cursor:pointer;}
 
-#openingAnimation { position: fixed; top:0; left:0; width:100%; height:100%; background:#121212; display:flex; align-items:center; justify-content:center; flex-direction:column; z-index:999; color:#ffd700; }
+#openingAnimation { position: fixed; top:0; left:0; width:100%; height:100%; background:#121212; display:flex; align-items:center; justify-content:center; flex-direction:column; z-index:999; color:#ffd700; overflow:hidden; }
 #openingAnimation img { width:300px; max-width:80%; border-radius:25px; animation: bestProductAnim 1.5s ease-out forwards; }
 #openingAnimation h1 { margin-top:20px; font-family:'Amiri', serif; font-size:2em; color:#ffd700; text-shadow:0 0 10px #ffd700,0 0 20px rgba(255,215,0,0.3); opacity:0; animation: fadeInText 2s 0.5s forwards; }
 @keyframes fadeInText { to { opacity:1; } }
 @keyframes bestProductAnim { 0% { transform: scale(0.5) rotate(-15deg); opacity:0; filter: brightness(0.5) blur(10px); } 50% { transform: scale(1.1) rotate(2deg); opacity:1; filter: brightness(1.2) blur(2px); } 100% { transform: scale(1) rotate(0deg); opacity:1; filter: brightness(1) blur(0); } }
 
-@media(max-width:768px){ header h1{font-size:1.6em;} #homeIconLeft{height:35px;} .shop-container{flex-direction:column; align-items:center;} .item{width:90%;} }
+@media(max-width:768px){
+  header h1{font-size:1.6em;} #homeIconLeft{height:35px;} .shop-container{flex-direction:column; align-items:center;} .item{width:90%;}
+  #openingAnimation h1{font-size:1.5em;}
+}
 </style>
 </head>
 <body class="dark">
 
 <div id="openingAnimation">
-  <img src="images/full_bloody2.png" alt="Best Product">
-  <h1>Full Bloody Dress</h1>
+  <img src="images/logo.png" alt="Logo">
+  <h1>KoNooZ</h1>
 </div>
 
 <header>
@@ -128,22 +131,28 @@ function displayProducts(category='all'){
     item.onclick=()=>{
       item.style.animation='goProductEffect 0.6s forwards';
       setTimeout(()=>{
+        // add a subtle zoom effect on product detail
+        detailSection.style.transform='scale(0.9)';
+        detailSection.classList.add('show');
+        setTimeout(()=>{ detailSection.style.transform='scale(1)'; },50);
+
         detailName.textContent=name; detailImg.src=p.img; detailImg.alt=name;
         detailPrice.textContent=`Price: ${p.price}`;
         detailOrder.href=`https://wa.me/212665299977?text=Hi! I want this ${encodeURIComponent(name)}`;
-        container.style.display='none'; detailSection.classList.add('show');
+        container.style.display='none'; 
       },600);
     };
     container.appendChild(item);
   });
 }
 
+// Opening animation fix for mobile "zzz"
 window.addEventListener('load', ()=>{
   setTimeout(()=>{
     openingDiv.style.opacity='0';
     openingDiv.style.transition='opacity 0.8s ease';
     setTimeout(()=>{ openingDiv.style.display='none'; },800);
-  },2500);
+  },2000); // shortened to prevent phone freeze
 });
 
 categoryButtons.forEach(btn=>{
