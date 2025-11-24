@@ -1,266 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>KoNooZ - Palestinian Shop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>KoNooZ</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
 
-<style>
-:root {
-  --bg-color:#121212; 
-  --text-color:#f1f1f1; 
-  --header-bg:#1a1a1a; 
-  --header-color:#ffd700;
-  --btn-bg:#333; 
-  --btn-color:#ffd700; 
-  --title-glow:#ffd700;
-}
+    /* Opening screen */
+    #opening {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeOut 3s ease forwards;
+      animation-delay: 3s;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background:var(--bg-color);
-  color:var(--text-color);
-  margin:0;
-  padding:0;
-  text-align:center;
-}
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
 
-/* ======= OPENING ANIMATION ======= */
-#openingAnimation {
-  position:fixed;
-  inset:0;
-  background:#121212;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  color:#ffd700;
-  z-index:999;
-}
+    #opening img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
 
-#openingAnimation img {
-  width:200px;
-  animation: logoPulse 2s infinite alternate;
-}
+    /* KoNooZ effect text */
+    .sleep-text {
+      font-size: 40px;
+      font-weight: bold;
+      font-family: 'Courier New', cursive;
+      color: white;
+      text-shadow:
+        0 0 5px #ff003c,
+        0 0 10px #ff003c,
+        0 0 20px #ff6a00;
+      animation: floatGlow 2s ease-in-out infinite;
+      letter-spacing: 3px;
+    }
 
-.zzz {
-  font-size:2em;
-  animation: floatZ 1s infinite;
-}
+    @keyframes floatGlow {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.05); }
+      100% { transform: translateY(0) scale(1); }
+    }
 
-@keyframes logoPulse {
-  from { transform:scale(0.9); }
-  to { transform:scale(1.1); }
-}
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: black;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-@keyframes floatZ {
-  0% { opacity:0; transform:translateY(10px); }
-  100% { opacity:1; transform:translateY(-10px); }
-}
+    .topbar img {
+      width: 40px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
 
-/* ======= HEADER ======= */
-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:15px 20px;
-  background:var(--header-bg);
-}
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
 
-#homeIconLeft {
-  width:40px;
-  cursor:pointer;
-  transition:0.3s;
-}
-#homeIconLeft:hover {
-  transform:scale(1.2) rotate(-8deg);
-}
+    .product {
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-#siteTitle {
-  flex:1;
-  color:var(--title-glow);
-  font-family:'Amiri', serif;
-  font-size:2em;
-}
+    .product:hover {
+      transform: scale(1.05);
+    }
 
-#toggleBtn {
-  background:var(--btn-bg);
-  color:var(--btn-color);
-  border:none;
-  padding:8px 15px;
-  border-radius:10px;
-  cursor:pointer;
-}
+    .product img {
+      width: 100%;
+      display: block;
+    }
 
-/* ======= PRODUCTS ======= */
-.shop-container {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  margin:20px;
-}
+    .product p {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
 
-.item {
-  background:#1c1c1c;
-  border-radius:20px;
-  padding:15px;
-  width:240px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
-  border:2px solid rgba(255,255,255,0.1);
-  opacity:0;
-  transform:translateY(30px);
-  animation: productIn 0.6s forwards;
-  cursor:pointer;
-}
+    /* Popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 999;
+      animation: zoomIn 0.3s ease;
+    }
 
-@keyframes productIn {
-  to { opacity:1; transform:translateY(0);}
-}
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-.item img {
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:15px;
-}
+    .popup img {
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
 
-.item:hover {
-  transform:scale(1.05);
-}
-
-/* click effect */
-.item:active {
-  animation: clickBoom 0.3s;
-}
-
-@keyframes clickBoom {
-  50% { transform:scale(1.1) rotate(1deg); }
-}
-
-/* ======= PRODUCT DETAIL ======= */
-.product-detail {
-  display:none;
-  max-width:600px;
-  margin:20px auto;
-  padding:20px;
-  background:#1c1c1c;
-  border-radius:20px;
-  animation: openDetail 0.5s forwards;
-}
-
-@keyframes openDetail {
-  from { opacity:0; transform:scale(0.9); }
-  to { opacity:1; transform:scale(1); }
-}
-
-.product-detail img {
-  width:100%;
-  border-radius:15px;
-}
-
-.back-btn {
-  margin-top:15px;
-  display:inline-block;
-  background:#333;
-  color:#ffd700;
-  padding:10px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-/* ======= MOBILE FIX ======= */
-@media(max-width:768px) {
-  .shop-container { flex-direction:column; align-items:center; }
-  .item { width:90%; }
-  #siteTitle { font-size:1.4em; }
-}
-</style>
+    .close {
+      padding: 10px 20px;
+      background: red;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- ===== OPENING SCREEN ===== -->
-<div id="openingAnimation">
-  <img src="images/logo.png" alt="KoNooZ Logo">
-  <div class="zzz">Z Z Z ✨</div>
+<!-- Opening -->
+<div id="opening">
+  <img src="images/logo.png">
+  <div class="sleep-text">KoNooZ</div>
 </div>
 
-<header>
-  <img src="images/logo.png" id="homeIconLeft" alt="Home Logo">
-  <h1 id="siteTitle">KoNooZ</h1>
-  <button id="toggleBtn">🌙 / AR</button>
-</header>
+<!-- Top bar -->
+<div class="topbar">
+  <img src="images/logo.png" onclick="location.reload()">
+  <h2>KoNooZ</h2>
+</div>
 
-<div class="shop-container" id="shopContainer"></div>
+<!-- Products -->
+<div class="products">
+  <div class="product" onclick="openPopup('images/full_bloody2.png')">
+    <img src="images/full_bloody2.png">
+    <p>Bloody Edition</p>
+  </div>
 
-<div class="product-detail" id="productDetail">
-  <h2 id="detailName"></h2>
-  <img id="detailImg">
-  <p id="detailPrice"></p>
-  <a id="detailOrder" target="_blank">Order on WhatsApp</a><br>
-  <span class="back-btn" id="backBtn">⬅ Back</span>
+  <div class="product" onclick="openPopup('images/itachi.png')">
+    <img src="images/itachi.png">
+    <p>Itachi Mode</p>
+  </div>
+
+  <div class="product" onclick="openPopup('images/saski.png')">
+    <img src="images/saski.png">
+    <p>Saski Mode</p>
+  </div>
+
+  <div class="product" onclick="openPopup('images/up_white_bloody1.png')">
+    <img src="images/up_white_bloody1.png">
+    <p>White Bloody</p>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup" onclick="closePopup()">
+  <img id="popupImg">
+  <div class="close">Close</div>
 </div>
 
 <script>
-let lang = 'en';
+  function openPopup(src) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popupImg").src = src;
+  }
 
-const products = [
-  {name:"Full Bloody Dress", price:"700 MAD", img:"images/full_bloody2.png"},
-  {name:"Full Bloody Dress 1", price:"700 MAD", img:"images/full_booldy1.png"},
-  {name:"Up Bloody 1", price:"400 MAD", img:"images/up_bloody1.png"},
-  {name:"Up Bloody Dark 2", price:"450 MAD", img:"images/up_bloody_dark2.png"},
-  {name:"Up White Bloody 1", price:"400 MAD", img:"images/up_white_bloody1.png"},
-  {name:"Up White Bloody 2", price:"420 MAD", img:"images/up_white_bloody2.png"},
-  {name:"Itachi Poster", price:"150 MAD", img:"images/itachi.png"},
-  {name:"Saski Poster", price:"150 MAD", img:"images/saski.png"}
-];
-
-const container = document.getElementById("shopContainer");
-const detail = document.getElementById("productDetail");
-
-function showProducts() {
-  container.innerHTML = "";
-  products.forEach((p,i) => {
-    let div = document.createElement("div");
-    div.className = "item";
-    div.style.animationDelay = (i*0.1)+"s";
-    div.innerHTML = `
-      <img src="${p.img}">
-      <h3>${p.name}</h3>
-      <p>Price: ${p.price}</p>
-    `;
-    div.onclick = () => openProduct(p);
-    container.appendChild(div);
-  });
-}
-
-function openProduct(p) {
-  container.style.display="none";
-  detail.style.display="block";
-  document.getElementById("detailName").innerText = p.name;
-  document.getElementById("detailImg").src = p.img;
-  document.getElementById("detailPrice").innerText = p.price;
-  document.getElementById("detailOrder").href =
-    `https://wa.me/212665299977?text=Hi! I want ${encodeURIComponent(p.name)}`;
-}
-
-document.getElementById("backBtn").onclick = () => {
-  detail.style.display = "none";
-  container.style.display = "flex";
-};
-
-document.getElementById("homeIconLeft").onclick = () => {
-  detail.style.display = "none";
-  container.style.display = "flex";
-};
-
-setTimeout(() => {
-  document.getElementById("openingAnimation").style.display="none";
-}, 2500);
-
-showProducts();
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
 </script>
 
 </body>
