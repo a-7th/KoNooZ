@@ -6,11 +6,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade&display=swap" rel="stylesheet">
 <style>
-/* --- Your CSS unchanged --- */
 :root { --bg-color:#121212; --text-color:#f1f1f1; --header-bg:#1a1a1a; --header-color:#ffd700; --btn-bg:#333; --btn-color:#ffd700; --title-glow:#ffd700; }
 body.ar-theme { --bg-color:#1b1b2f; --text-color:#ffe0e0; --header-bg:#2a1a3d; --header-color:#ff4d4d; --btn-bg:#3a2a4d; --btn-color:#ff4d4d; --title-glow:#ff4d4d; }
 body { font-family: Arial,sans-serif; background:var(--bg-color); color:var(--text-color); margin:0; padding:0; text-align:center; overflow-x:hidden; transition:0.5s; }
-/* ... rest of your CSS remains the same ... */
+
+header { display:flex; align-items:center; justify-content:space-between; padding:20px; background:var(--header-bg); color:var(--header-color); position:relative; z-index:2; }
+#homeIconLeft {height:40px; width:40px; cursor:pointer; transition: transform 0.3s;}
+#homeIconLeft:hover { transform: scale(1.2) rotate(-10deg); }
+
+#siteTitle { flex:1; text-align:center; font-size:2em; font-weight:bold; font-family:'Amiri', serif; color: var(--title-glow); text-shadow: 0 0 5px var(--title-glow), 0 0 10px rgba(255,0,0,0.3); animation: glowPulse 2s infinite alternate; }
+@keyframes glowPulse { 0% { text-shadow: 0 0 5px var(--title-glow), 0 0 10px rgba(255,0,0,0.3); } 50% { text-shadow: 0 0 15px var(--title-glow), 0 0 25px rgba(255,0,0,0.5); } 100% { text-shadow: 0 0 5px var(--title-glow), 0 0 10px rgba(255,0,0,0.3); } }
+
+#toggleBtn { padding:8px 12px; background:var(--btn-bg); color:var(--btn-color); border:none; border-radius:8px; cursor:pointer; animation: toggleSparkle 2s infinite alternate; box-shadow: 0 0 10px rgba(255,0,0,0.3); transition:0.3s; }
+#toggleBtn:hover { box-shadow: 0 0 20px rgba(255,0,0,0.6); }
+@keyframes toggleSparkle{0%{text-shadow:0 0 5px var(--btn-color);}100%{text-shadow:0 0 15px var(--btn-color);} }
+
+.category-filter{margin:20px;}
+.category-filter button{ margin:5px; padding:10px 15px; background:var(--btn-bg); color:var(--btn-color); border:none; border-radius:12px; cursor:pointer; transition:0.3s, transform 0.2s; }
+.category-filter button:hover,.category-filter button.active{ background:#555; transform:translateY(-2px); }
+
+.shop-container{ display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin:20px; opacity:1; transition:opacity 0.5s; }
+
+.item { background: linear-gradient(135deg, #1c1c1c, #2a2a2a); border-radius: 30px; padding: 20px; width: 240px; box-shadow: 0 15px 25px rgba(0,0,0,0.7), 0 0 15px rgba(255,215,0,0.2) inset; position: relative; overflow:hidden; opacity:0; transform:translateY(20px); transition: all 0.4s ease; border:2px solid rgba(255,255,255,0.1); cursor:pointer; }
+.item:hover { transform: translateY(-10px) scale(1.05); box-shadow:0 20px 35px rgba(0,0,0,0.8), 0 0 25px rgba(255,215,0,0.4) inset; }
+.item img { width:100%; height:220px; object-fit:cover; border-radius:25px; margin-bottom:15px; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.item:hover img { transform: scale(1.07) rotate(-1deg); box-shadow:0 10px 25px rgba(0,0,0,0.6); }
+.item h3 { margin:5px 0; font-weight:700; font-family:'Scheherazade', serif; color:#ffd700; font-size:1.2em; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.item p { margin:5px 0; font-weight:500; color:#fff; font-size:1em; }
+.item .badge { position:absolute; top:15px; right:15px; background:#ffd700; color:#000; padding:5px 10px; border-radius:12px; font-size:0.8em; font-weight:700; text-transform:uppercase; box-shadow:0 3px 8px rgba(0,0,0,0.5); }
+
+@keyframes goProductEffect { 0% { transform: scale(1) rotate(0deg); box-shadow:0 15px 25px rgba(0,0,0,0.7);} 50% { transform: scale(1.08) rotate(2deg); box-shadow:0 20px 40px rgba(255,215,0,0.6);} 100% { transform: scale(1) rotate(0deg); box-shadow:0 15px 25px rgba(0,0,0,0.7);} }
+.item-opening { animation: productOpen 0.8s ease forwards; }
+@keyframes productOpen { 0% { opacity:0; transform: scale(0.5) rotate(-15deg); } 50% { opacity:1; transform: scale(1.1) rotate(3deg); } 100% { opacity:1; transform: scale(1) rotate(0deg); } }
+
+.product-detail{ display:none; margin:20px auto; background:linear-gradient(145deg, #1c1c1c, #2a2a2a); color:var(--text-color); border-radius:25px; padding:20px; width:90%; max-width:600px; text-align:left; box-shadow:0 8px 25px rgba(0,0,0,0.25); opacity:0; transition:opacity 0.5s; }
+.product-detail.show{display:block; opacity:1;}
+.product-detail img{width:100%; height:auto; border-radius:20px; margin-bottom:15px;}
+.back-btn{display:inline-block; margin-top:10px; padding:8px 12px; background:#555; color:#ffd700; text-decoration:none; border-radius:8px; cursor:pointer;}
+
+#openingAnimation { position: fixed; top:0; left:0; width:100%; height:100%; background:#121212; display:flex; align-items:center; justify-content:center; flex-direction:column; z-index:999; color:#ffd700; }
+#openingAnimation img { width:300px; max-width:80%; border-radius:25px; animation: bestProductAnim 1.5s ease-out forwards; }
+#openingAnimation h1 { margin-top:20px; font-family:'Amiri', serif; font-size:2em; color:#ffd700; text-shadow:0 0 10px #ffd700,0 0 20px rgba(255,215,0,0.3); opacity:0; animation: fadeInText 2s 0.5s forwards; }
+@keyframes fadeInText { to { opacity:1; } }
+@keyframes bestProductAnim { 0% { transform: scale(0.5) rotate(-15deg); opacity:0; filter: brightness(0.5) blur(10px); } 50% { transform: scale(1.1) rotate(2deg); opacity:1; filter: brightness(1.2) blur(2px); } 100% { transform: scale(1) rotate(0deg); opacity:1; filter: brightness(1) blur(0); } }
+
+@media(max-width:768px){ header h1{font-size:1.6em;} #homeIconLeft{height:35px;} .shop-container{flex-direction:column; align-items:center;} .item{width:90%;} }
 </style>
 </head>
 <body class="dark">
@@ -21,7 +61,7 @@ body { font-family: Arial,sans-serif; background:var(--bg-color); color:var(--te
 </div>
 
 <header>
-  <img src="images/Screenshot_From_2025-11-22_20-59-18.png" alt="Home" id="homeIconLeft">
+  <img src="images/logo.png" alt="Home" id="homeIconLeft">
   <h1 id="siteTitle">KoNooZ</h1>
   <button id="toggleBtn">🌙 / AR</button>
 </header>
