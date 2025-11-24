@@ -92,20 +92,12 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
   100% { opacity:1; transform: scale(1) rotate(0deg); }
 }
 
-/* Product Detail Animation */
 .product-detail{
   display:none; margin:20px auto; background:linear-gradient(145deg, #1c1c1c, #2a2a2a); color:var(--text-color);
   border-radius:25px; padding:20px; width:90%; max-width:600px; text-align:left;
-  box-shadow:0 8px 25px rgba(0,0,0,0.25); opacity:0; transition:opacity 0.5s, transform 0.5s;
-  transform: scale(0.8);
+  box-shadow:0 8px 25px rgba(0,0,0,0.25); opacity:0; transition:opacity 0.5s;
 }
-.product-detail.show{
-  display:block; opacity:1; transform: scale(1); animation: detailOpen 0.5s ease forwards;
-}
-@keyframes detailOpen{
-  0% { opacity:0; transform: scale(0.8); }
-  100% { opacity:1; transform: scale(1); }
-}
+.product-detail.show{display:block; opacity:1;}
 .product-detail img{width:100%; height:auto; border-radius:20px; margin-bottom:15px;}
 .back-btn{display:inline-block; margin-top:10px; padding:8px 12px; background:#555; color:#ffd700; text-decoration:none; border-radius:8px; cursor:pointer;}
 
@@ -134,12 +126,12 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 <body class="dark">
 
 <div id="openingAnimation">
-  <img src="/home/a7th/Pictures/Screenshots/konooz/full_bloody2.png" alt="Best Product">
+  <img src="images/full_bloody2.png" alt="Best Product">
   <h1>Full Bloody Dress</h1>
 </div>
 
 <header>
-  <img src="/home/a7th/Pictures/Screenshots/Screenshot From 2025-11-22 20-59-18.png" alt="Home" id="homeIconLeft">
+  <img src="images/Screenshot From 2025-11-22 20-59-18.png" alt="Home" id="homeIconLeft">
   <h1 id="siteTitle">KoNooZ</h1>
   <button id="toggleBtn">🌙 / AR</button>
 </header>
@@ -167,17 +159,18 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 <script>
 let lang='en';
 const products=[
-  {nameEn:"Full Bloody Dress", nameAr:"فل بولدي", price:"700.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/full_bloody2.png", category:"palestinian_stuff", badge:"Special", best:true},
-  {nameEn:"Full Bloody Dress 1", nameAr:"فل بولدي", price:"700.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/full_booldy1.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody 1", nameAr:"أب بولدي", price:"400.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_bloody1.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody Dark 2", nameAr:"أب بولدي غامق 2", price:"450.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_bloody_dark2.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody Dark 2 Copy", nameAr:"أب بولدي غامق 2 (نسخة)", price:"450.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_bloody_dark2 (Copy).png", category:"palestinian_stuff"},
-  {nameEn:"Up White Bloody 1", nameAr:"أب أبيض بولدي", price:"400.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_white_bloody1.png", category:"palestinian_stuff"},
-  {nameEn:"Up White Bloody 2", nameAr:"أب أبيض بولدي 2", price:"420.00MAD", img:"/home/a7th/Pictures/Screenshots/konooz/up_white_bloody2.png", category:"palestinian_stuff"},
-  
-  {nameEn:"Itachi Shirt", nameAr:"تي شيرت إيتاتشي", price:"200.00MAD", img:"/home/a7th/Pictures/Screenshots/itachi.png", category:"tshirt"},
-  {nameEn:"Saski Shirt", nameAr:"تي شيرت ساسكي", price:"200.00MAD", img:"/home/a7th/Pictures/Screenshots/saski.png", category:"tshirt"},
+  {nameEn:"Full Bloody Dress", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_bloody2.png", category:"palestinian_stuff", badge:"Special", best:true},
+  {nameEn:"Full Bloody Dress 1", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_booldy1.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody 1", nameAr:"أب بولدي", price:"400.00MAD", img:"images/up_bloody1.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody Dark 2", nameAr:"أب بولدي غامق", price:"400.00MAD", img:"images/up_bloody_dark2.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody Dark 2 Copy", nameAr:"أب بولدي غامق نسخة", price:"400.00MAD", img:"images/up_bloody_dark2 (Copy).png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up White Bloody 1", nameAr:"أب أبيض بولدي", price:"400.00MAD", img:"images/up_white_bloody1.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up White Bloody 2", nameAr:"أب أبيض بولدي 2", price:"400.00MAD", img:"images/up_white_bloody2.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Itachi Poster", nameAr:"بوستر إتاتشي", price:"200.00MAD", img:"images/itachi.png", category:"accessories"},
+  {nameEn:"Saski Poster", nameAr:"بوستر ساسكي", price:"200.00MAD", img:"images/saski.png", category:"accessories"},
+  {nameEn:"Background Image", nameAr:"خلفية", price:"100.00MAD", img:"images/a7th backgrnd.png", category:"accessories"},
 ];
+
 const container=document.getElementById('shopContainer');
 const categoryButtons=document.querySelectorAll('#categoryFilter button');
 const detailSection=document.getElementById('productDetail');
@@ -198,7 +191,7 @@ function displayProducts(category='all'){
     const item=document.createElement('div'); 
     item.classList.add('item','item-opening'); // product opening animation
     if(p.best) item.classList.add('best');
-    item.style.animationDelay=(i*0.15)+'s';
+    item.style.animationDelay=(i*0.2)+'s';
     const name=lang==='en'?p.nameEn:p.nameAr;
     item.innerHTML=`${p.badge?'<div class="badge">'+p.badge+'</div>':''}<img src="${p.img}" alt="${name}"><h3>${name}</h3><p>Price: ${p.price}</p>`;
     
