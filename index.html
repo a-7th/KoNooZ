@@ -10,13 +10,10 @@
   --bg-color:#121212; --text-color:#f1f1f1; --header-bg:#1a1a1a; --header-color:#ffd700;
   --btn-bg:#333; --btn-color:#ffd700; --title-glow:#ffd700;
 }
-
-/* AR Theme Variables */
 body.ar-theme {
   --bg-color:#1b1b2f; --text-color:#ffe0e0; --header-bg:#2a1a3d; --header-color:#ff4d4d;
   --btn-bg:#3a2a4d; --btn-color:#ff4d4d; --title-glow:#ff4d4d;
 }
-
 body { font-family: Arial,sans-serif; background:var(--bg-color); color:var(--text-color);
   margin:0; padding:0; text-align:center; overflow-x:hidden; transition:0.5s; }
 
@@ -81,11 +78,7 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
   50% { transform: scale(1.08) rotate(2deg); box-shadow:0 20px 40px rgba(255,215,0,0.6);}
   100% { transform: scale(1) rotate(0deg); box-shadow:0 15px 25px rgba(0,0,0,0.7);}
 }
-
-/* Product Opening Animation */
-.item-opening {
-  animation: productOpen 0.8s ease forwards;
-}
+.item-opening { animation: productOpen 0.8s ease forwards; }
 @keyframes productOpen {
   0% { opacity:0; transform: scale(0.5) rotate(-15deg); }
   50% { opacity:1; transform: scale(1.1) rotate(3deg); }
@@ -126,12 +119,12 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 <body class="dark">
 
 <div id="openingAnimation">
-  <img src="images/full_bloody2.png" alt="Best Product">
+  <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/full_bloody2.png" alt="Best Product">
   <h1>Full Bloody Dress</h1>
 </div>
 
 <header>
-  <img src="images/Screenshot From 2025-11-22 20-59-18.png" alt="Home" id="homeIconLeft">
+  <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/images/Screenshot%20From%202025-11-22%2020-59-18.png" alt="Home" id="homeIconLeft">
   <h1 id="siteTitle">KoNooZ</h1>
   <button id="toggleBtn">🌙 / AR</button>
 </header>
@@ -159,16 +152,16 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 <script>
 let lang='en';
 const products=[
-  {nameEn:"Full Bloody Dress", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_bloody2.png", category:"palestinian_stuff", badge:"Special", best:true},
-  {nameEn:"Full Bloody Dress 1", nameAr:"فل بولدي", price:"700.00MAD", img:"images/full_booldy1.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody 1", nameAr:"أب بولدي", price:"400.00MAD", img:"images/up_bloody1.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody Dark 2", nameAr:"أب بولدي غامق", price:"400.00MAD", img:"images/up_bloody_dark2.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up Bloody Dark 2 Copy", nameAr:"أب بولدي غامق نسخة", price:"400.00MAD", img:"images/up_bloody_dark2 (Copy).png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up White Bloody 1", nameAr:"أب أبيض بولدي", price:"400.00MAD", img:"images/up_white_bloody1.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Up White Bloody 2", nameAr:"أب أبيض بولدي 2", price:"400.00MAD", img:"images/up_white_bloody2.png", category:"palestinian_stuff", badge:"Special"},
-  {nameEn:"Itachi Poster", nameAr:"بوستر إتاتشي", price:"200.00MAD", img:"images/itachi.png", category:"accessories"},
-  {nameEn:"Saski Poster", nameAr:"بوستر ساسكي", price:"200.00MAD", img:"images/saski.png", category:"accessories"},
-  {nameEn:"Background Image", nameAr:"خلفية", price:"100.00MAD", img:"images/a7th backgrnd.png", category:"accessories"},
+  {nameEn:"Full Bloody Dress", nameAr:"فل بولدي", price:"700.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/full_bloody2.png", category:"palestinian_stuff", badge:"Special", best:true},
+  {nameEn:"Full Bloody Dress 1", nameAr:"فل بولدي", price:"700.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/full_booldy1.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody 1", nameAr:"أب بولدي", price:"400.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/up_bloody1.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody Dark 2", nameAr:"أب بولدي داكن", price:"450.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/up_bloody_dark2.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up Bloody Dark 2 Copy", nameAr:"نسخة أب بولدي داكن", price:"450.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/up_bloody_dark2%20(Copy).png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up White Bloody 1", nameAr:"أب أبيض بولدي", price:"400.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/up_white_bloody1.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Up White Bloody 2", nameAr:"أب أبيض بولدي 2", price:"420.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/up_white_bloody2.png", category:"palestinian_stuff", badge:"Special"},
+  {nameEn:"Itachi Poster", nameAr:"بوستر إيتاتشي", price:"150.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/itachi.png", category:"accessories"},
+  {nameEn:"Saski Poster", nameAr:"بوستر ساسكي", price:"150.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/saski.png", category:"accessories"},
+  {nameEn:"Background Poster", nameAr:"خلفية", price:"100.00MAD", img:"https://raw.githubusercontent.com/USERNAME/REPO/main/images/a7th%20backgrnd.png", category:"accessories"}
 ];
 
 const container=document.getElementById('shopContainer');
@@ -189,7 +182,7 @@ function displayProducts(category='all'){
   const filtered=category==='all'?products:products.filter(p=>p.category===category);
   filtered.forEach((p,i)=>{
     const item=document.createElement('div'); 
-    item.classList.add('item','item-opening'); // product opening animation
+    item.classList.add('item','item-opening'); 
     if(p.best) item.classList.add('best');
     item.style.animationDelay=(i*0.2)+'s';
     const name=lang==='en'?p.nameEn:p.nameAr;
