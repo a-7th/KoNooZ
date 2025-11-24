@@ -1,147 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>KoNooZ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade&display=swap" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0b0b0b;
-    color: white;
-  }
+  <meta charset="UTF-8">
+  <title>KoNooZ</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
 
-  /* ===== Opening ===== */
-  #opening {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
+    /* Opening screen */
+    #opening {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeOut 3s ease forwards;
+      animation-delay: 3s;
+    }
 
-  #opening img {
-    width: 120px;
-    margin-bottom: 20px;
-    animation: logoPulse 2s infinite alternate;
-  }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
 
-  .sleep-text {
-    font-size: 50px;
-    font-weight: bold;
-    font-family: 'Courier New', cursive;
-    color: white;
-    text-shadow: 0 0 5px #ff003c, 0 0 10px #ff003c, 0 0 20px #ff6a00;
-    animation: floatGlow 2s ease-in-out infinite;
-    letter-spacing: 4px;
-  }
+    #opening img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
 
-  @keyframes floatGlow {
-    0% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.05); }
-    100% { transform: translateY(0) scale(1); }
-  }
+    /* KoNooZ effect text */
+    .sleep-text {
+      font-size: 40px;
+      font-weight: bold;
+      font-family: 'Courier New', cursive;
+      color: white;
+      text-shadow:
+        0 0 5px #ff003c,
+        0 0 10px #ff003c,
+        0 0 20px #ff6a00;
+      animation: floatGlow 2s ease-in-out infinite;
+      letter-spacing: 3px;
+    }
 
-  @keyframes logoPulse {
-    from { transform: scale(0.9); }
-    to { transform: scale(1.1); }
-  }
+    @keyframes floatGlow {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.05); }
+      100% { transform: translateY(0) scale(1); }
+    }
 
-  /* ===== Top bar ===== */
-  .topbar {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: #000;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: black;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-  .topbar img {
-    width: 40px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
+    .topbar img {
+      width: 40px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
 
-  /* ===== Products ===== */
-  .products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 20px;
-  }
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
 
-  .product {
-    background: #111;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+    .product {
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-  .product:hover {
-    transform: scale(1.05);
-  }
+    .product:hover {
+      transform: scale(1.05);
+    }
 
-  .product img {
-    width: 100%;
-    display: block;
-  }
+    .product img {
+      width: 100%;
+      display: block;
+    }
 
-  .product p {
-    text-align: center;
-    padding: 10px;
-    font-size: 14px;
-  }
+    .product p {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
 
-  /* ===== Popup ===== */
-  .popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 999;
-    animation: zoomIn 0.3s ease;
-  }
+    /* Popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 999;
+      animation: zoomIn 0.3s ease;
+    }
 
-  @keyframes zoomIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-  .popup img {
-    width: 80%;
-    max-width: 300px;
-    margin-bottom: 20px;
-  }
+    .popup img {
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
 
-  .close {
-    padding: 10px 20px;
-    background: red;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  /* ===== Mobile fix ===== */
-  @media(max-width:768px) {
-    .products { grid-template-columns: 1fr; }
-  }
-</style>
+    .close {
+      padding: 10px 20px;
+      background: red;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
 <!-- Opening -->
 <div id="opening">
-  <img src="images/logo.png" alt="KoNooZ Logo">
+  <img src="images/logo.png">
   <div class="sleep-text">KoNooZ</div>
 </div>
 
@@ -154,56 +154,40 @@
 <!-- Products -->
 <div class="products">
   <div class="product" onclick="openPopup('images/full_bloody2.png')">
-    <img src="images/full_bloody2.png" alt="Full Bloody Dress">
-    <p>Full Bloody Dress</p>
-  </div>
-
-  <div class="product" onclick="openPopup('images/full_booldy1.png')">
-    <img src="images/full_booldy1.png" alt="Full Bloody 1">
-    <p>Full Bloody 1</p>
+    <img src="images/full_bloody2.png">
+    <p>Bloody Edition</p>
   </div>
 
   <div class="product" onclick="openPopup('images/itachi.png')">
-    <img src="images/itachi.png" alt="Itachi Poster">
-    <p>Itachi Poster</p>
+    <img src="images/itachi.png">
+    <p>Itachi Mode</p>
   </div>
 
   <div class="product" onclick="openPopup('images/saski.png')">
-    <img src="images/saski.png" alt="Saski Poster">
-    <p>Saski Poster</p>
+    <img src="images/saski.png">
+    <p>Saski Mode</p>
   </div>
 
   <div class="product" onclick="openPopup('images/up_white_bloody1.png')">
-    <img src="images/up_white_bloody1.png" alt="Up White Bloody 1">
-    <p>Up White Bloody 1</p>
-  </div>
-
-  <div class="product" onclick="openPopup('images/up_white_bloody2.png')">
-    <img src="images/up_white_bloody2.png" alt="Up White Bloody 2">
-    <p>Up White Bloody 2</p>
+    <img src="images/up_white_bloody1.png">
+    <p>White Bloody</p>
   </div>
 </div>
 
 <!-- Popup -->
 <div class="popup" id="popup" onclick="closePopup()">
-  <img id="popupImg" alt="Product">
+  <img id="popupImg">
   <div class="close">Close</div>
 </div>
 
 <script>
-  // Opening screen fade
-  setTimeout(() => {
-    document.getElementById('opening').style.display = 'none';
-  }, 3000);
-
-  // Popup logic
   function openPopup(src) {
-    document.getElementById('popup').style.display = 'flex';
-    document.getElementById('popupImg').src = src;
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popupImg").src = src;
   }
 
   function closePopup() {
-    document.getElementById('popup').style.display = 'none';
+    document.getElementById("popup").style.display = "none";
   }
 </script>
 
