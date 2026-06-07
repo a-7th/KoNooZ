@@ -5,7 +5,7 @@ const products=[
   {nameEn:"up_bloody", nameAr:"أب بولدي", price:"400.00MAD", img:"images/up_bloody_dark2.png", category:"palestinian_stuff"},
 ];
 
-const container=document.getElementById('shopContainer');
+const container=document.etElementById('shopContainer');
 const categoryButtons=document.querySelectorAll('#categoryFilter button');
 const darkModeToggle=document.getElementById('darkModeToggle');
 const langToggle=document.getElementById('langToggle');
