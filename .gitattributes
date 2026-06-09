@@ -1,0 +1,7 @@
+# Ignore HTML and CSS files when calculating repository language percentages
+*.html linguist-vendored
+*.css linguist-vendored
+
+# Explicitly make sure Java and JavaScript are detected as the main programming languages
+*.js linguist-detectable=true
+*.java linguist-detectable=true
